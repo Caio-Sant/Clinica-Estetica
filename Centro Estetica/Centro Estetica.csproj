@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6F56C8EF-2A2A-4940-9A72-58A7F8AE85F8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Centro_Estetica</RootNamespace>
+    <AssemblyName>Centro Estetica</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Installer for Windows\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DB\Base\Connection.cs" />
+    <Compile Include="DB\Base\Database.cs" />
+    <Compile Include="DB\Base\Entregavel1\controle Funcionario\FuncionarioBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel1\controle Funcionario\FuncionarioDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel1\controle Funcionario\FuncionarioDTO.cs" />
+    <Compile Include="DB\Base\Entregavel1\Folha de Pagamento\FolhaPagamentoBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel1\Folha de Pagamento\FuncionarioDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel1\Folha de Pagamento\FolhaPagamentoDTO.cs" />
+    <Compile Include="DB\Base\Entregavel1\Folha de Pagamento\VwConsultarFolhapagamento.cs" />
+    <Compile Include="DB\Base\Entregavel2\compras\CompraBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel2\compras\CompraDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel2\compras\CompraDTO.cs" />
+    <Compile Include="DB\Base\Entregavel2\compras\ComprasBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel2\compras\ComprasDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel2\compras\comprasDTO.cs" />
+    <Compile Include="DB\Base\Entregavel2\compras\vwcompra.cs" />
+    <Compile Include="DB\Base\Entregavel2\Foncesedor\Fornecedorbusiness.cs" />
+    <Compile Include="DB\Base\Entregavel2\Foncesedor\FornecedorDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel2\Foncesedor\FornecedorDTO.cs" />
+    <Compile Include="DB\Base\Entregavel2\Produto\produtoBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel2\Produto\ProdutoDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel2\Produto\ProdutoDTO.cs" />
+    <Compile Include="DB\Base\Entregavel3\Cliente\PacienteBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel3\Cliente\PacienteDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel3\Cliente\PacienteDTO.cs" />
+    <Compile Include="DB\Base\Entregavel3\Controlepedido\PedidoBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel3\Controlepedido\PedidoDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel3\Controlepedido\PedidoDTO.cs" />
+    <Compile Include="DB\Base\Entregavel3\Pedido\pedidoBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel3\Pedido\PedidoConsultarView.cs" />
+    <Compile Include="DB\Base\Entregavel3\Pedido\PedidoDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel3\Pedido\PedidoDTO.cs" />
+    <Compile Include="DB\Base\Entregavel3\Pedido\PedidoItemBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel3\Pedido\PedidoItemDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel3\Pedido\PedidoItemDTO.cs" />
+    <Compile Include="DB\Base\Entregavel4\Estoque\EstoqueBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel4\Estoque\EstoqueDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel4\Estoque\EstoqueDTO.cs" />
+    <Compile Include="DB\Base\Entregavel4\FluxoDCaixa\FluxoCaixaBusiness.cs" />
+    <Compile Include="DB\Base\Entregavel4\FluxoDCaixa\FluxoCaixaDatabase.cs" />
+    <Compile Include="DB\Base\Entregavel4\FluxoDCaixa\FluxoCaixaDTO.cs" />
+    <Compile Include="DB\Base\Objetos\CorreioApi.cs" />
+    <Compile Include="DB\Base\Objetos\CorreioResponde.cs" />
+    <Compile Include="DB\Base\Objetos\Email.cs" />
+    <Compile Include="DB\Base\Objetos\FolhaPagamento.cs" />
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="splash.Designer.cs">
+      <DependentUpon>splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Cliente\frmClienteCadastrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Cliente\frmClienteCadastrar.Designer.cs">
+      <DependentUpon>frmClienteCadastrar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Cliente\frmClienteConsultar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Cliente\frmClienteConsultar.Designer.cs">
+      <DependentUpon>frmClienteConsultar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Compras\frmCadastarCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Compras\frmCadastarCompras.Designer.cs">
+      <DependentUpon>frmCadastarCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Compras\frmConsultarCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Compras\frmConsultarCompras.Designer.cs">
+      <DependentUpon>frmConsultarCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\ControlesDVendas\frmControleVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\ControlesDVendas\frmControleVendas.Designer.cs">
+      <DependentUpon>frmControleVendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Esqueci a Senha\Esquecia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Esqueci a Senha\Esquecia.Designer.cs">
+      <DependentUpon>Esquecia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Estoque\Dar baixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Estoque\Dar baixa.Designer.cs">
+      <DependentUpon>Dar baixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Estoque\frmConsultarEstoque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Estoque\frmConsultarEstoque.Designer.cs">
+      <DependentUpon>frmConsultarEstoque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\FluxoDcaixa\frmConsultarCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\FluxoDcaixa\frmConsultarCaixa.Designer.cs">
+      <DependentUpon>frmConsultarCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\folha de pagamento\frmFolhaPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\folha de pagamento\frmFolhaPagamento.Designer.cs">
+      <DependentUpon>frmFolhaPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\folha de pagamento\frmFolhaPagamentoConsultar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\folha de pagamento\frmFolhaPagamentoConsultar.Designer.cs">
+      <DependentUpon>frmFolhaPagamentoConsultar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Fonecedor\frmCadastrarFornecedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Fonecedor\frmCadastrarFornecedor.Designer.cs">
+      <DependentUpon>frmCadastrarFornecedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Fonecedor\frmConsultarFornecedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Fonecedor\frmConsultarFornecedor.Designer.cs">
+      <DependentUpon>frmConsultarFornecedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Funcionario\frmCadastrarFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Funcionario\frmCadastrarFuncionario.Designer.cs">
+      <DependentUpon>frmCadastrarFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Funcionario\frmConsultarFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Funcionario\frmConsultarFuncionario.Designer.cs">
+      <DependentUpon>frmConsultarFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\FrmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\FrmMenu.Designer.cs">
+      <DependentUpon>FrmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Pedido\frmCadastrarPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Pedido\frmCadastrarPedido.Designer.cs">
+      <DependentUpon>frmCadastrarPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Pedido\frmConsultarPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Pedido\frmConsultarPedido.Designer.cs">
+      <DependentUpon>frmConsultarPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Produto\frmCadastrarTramamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Produto\frmCadastrarTramamento.Designer.cs">
+      <DependentUpon>frmCadastrarTramamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TELAS\Produto\frmConsultarTratamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TELAS\Produto\frmConsultarTratamento.Designer.cs">
+      <DependentUpon>frmConsultarTratamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Base\Objetos\UserSession.cs" />
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="splash.resx">
+      <DependentUpon>splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Cliente\frmClienteCadastrar.resx">
+      <DependentUpon>frmClienteCadastrar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Cliente\frmClienteConsultar.resx">
+      <DependentUpon>frmClienteConsultar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Compras\frmCadastarCompras.resx">
+      <DependentUpon>frmCadastarCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Compras\frmConsultarCompras.resx">
+      <DependentUpon>frmConsultarCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\ControlesDVendas\frmControleVendas.resx">
+      <DependentUpon>frmControleVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Esqueci a Senha\Esquecia.resx">
+      <DependentUpon>Esquecia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Estoque\Dar baixa.resx">
+      <DependentUpon>Dar baixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Estoque\frmConsultarEstoque.resx">
+      <DependentUpon>frmConsultarEstoque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\FluxoDcaixa\frmConsultarCaixa.resx">
+      <DependentUpon>frmConsultarCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\folha de pagamento\frmFolhaPagamento.resx">
+      <DependentUpon>frmFolhaPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\folha de pagamento\frmFolhaPagamentoConsultar.resx">
+      <DependentUpon>frmFolhaPagamentoConsultar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Fonecedor\frmCadastrarFornecedor.resx">
+      <DependentUpon>frmCadastrarFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Fonecedor\frmConsultarFornecedor.resx">
+      <DependentUpon>frmConsultarFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Funcionario\frmCadastrarFuncionario.resx">
+      <DependentUpon>frmCadastrarFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Funcionario\frmConsultarFuncionario.resx">
+      <DependentUpon>frmConsultarFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\FrmMenu.resx">
+      <DependentUpon>FrmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Pedido\frmCadastrarPedido.resx">
+      <DependentUpon>frmCadastrarPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Pedido\frmConsultarPedido.resx">
+      <DependentUpon>frmConsultarPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Produto\frmCadastrarTramamento.resx">
+      <DependentUpon>frmCadastrarTramamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TELAS\Produto\frmConsultarTratamento.resx">
+      <DependentUpon>frmConsultarTratamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\High Estetic final-001.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\High Estetic final-0011.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gynabuterf.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\23.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\00001.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\High Estetic final-001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\88887.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\98989.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\High Estetic fina90090.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MODIFICADO-2-3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\45.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\77676.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\asasa.jpg" />
+    <None Include="Resources\as.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\Base\Script.txt" />
+    <None Include="Resources\save-file-option.png" />
+    <None Include="Resources\save-file-option %281%29.png" />
+    <None Include="Resources\rubbish-bin.png" />
+    <None Include="Resources\refreshing.png" />
+    <None Include="Resources\magnifier.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\calculator.png" />
+    <None Include="Resources\d67.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

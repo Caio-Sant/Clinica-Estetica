@@ -1,0 +1,217 @@
+﻿
+drop database esteticaDB;
+
+create database esteticaDB;
+
+use esteticaDB;
+
+CREATE TABLE `esteticaDB`.`tb_paciente` (
+	`id_paciente` INT NOT NULL AUTO_INCREMENT,
+	`nm_completo` varchar(100) NOT NULL,
+	`ds_rg` varchar(20) NOT NULL UNIQUE,
+	`ds_cpf` varchar(15) NOT NULL UNIQUE,
+	`ds_email` varchar(100) NOT NULL,
+	`dt_nascimento` DATE NOT NULL,
+	`ds_telefone` varchar(20) NOT NULL,
+	`ds_celular` varchar(20) NOT NULL,
+	`ds_cep` varchar(20) NOT NULL,
+	`ds_rua` varchar(50) NOT NULL,
+	`ds_ndacasa` varchar(5) NOT NULL,
+	`ds_complemento` varchar(100) NOT NULL,
+	PRIMARY KEY (`id_paciente`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_funcionario` (
+	`id_funcionario` INT NOT NULL AUTO_INCREMENT,
+	`nm_completo` varchar(100) NOT NULL,
+	`ds_sexo` varchar(20) NOT NULL,
+	`dt_nascimento` DATE NOT NULL,
+	`ds_rg` varchar(15) NOT NULL UNIQUE,
+	`ds_cpf` varchar(15) NOT NULL UNIQUE,
+	`ds_telefone` varchar(20) NOT NULL,
+	`ds_cep` varchar(15) NOT NULL,
+	`ds_ndacasa` varchar(5) NOT NULL,
+	`ds_email` varchar(50) NOT NULL,
+	`dt_admissao` DATE NOT NULL,
+	`ds_cargo` varchar(50) NOT NULL,
+	`ds_login` varchar(20) NOT NULL,
+	`ds_senha` varchar(20) NOT NULL,
+	`bt_permissaoadm` BOOLEAN NOT NULL,
+   	`vl_salario` DECIMAL NOT NULL,    
+	PRIMARY KEY (`id_funcionario`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_folhapagamento` (
+    `id_folhapagamento` INT NOT NULL AUTO_INCREMENT,
+    `id_funcionario` INT NOT NULL,
+    `hr_horasextras` INT NOT NULL,
+    `bt_valetransporte` BOOLEAN NOT NULL,
+    `vl_inss` DECIMAL NOT NULL,
+    `vl_ir` DECIMAL NOT NULL,
+    `vl_fgts` DECIMAL NOT NULL,
+    `vl_ValeTransporte` DECIMAL NOT NULL,
+    `vl_salarioliquido` DECIMAL NOT NULL,
+    `ds_mes` varchar (20) NOT NULL,
+    PRIMARY KEY (`id_folhapagamento`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_fornecedor` (
+    `id_fornecedor` INT NOT NULL AUTO_INCREMENT,
+    `nm_nome` varchar(100) NOT NULL,
+    `ds_cnpj` varchar(20) NOT NULL,
+    `ds_telefone` varchar(15) NOT NULL,
+    `ds_cep` varchar(15) NOT NULL,
+    `ds_rua` varchar(50) NOT NULL,
+    `ds_ndacasa` varchar(5) NOT NULL,
+    `ds_email` varchar(100) NOT NULL,
+    PRIMARY KEY (`id_fornecedor`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_produto` (
+	`id_produto` INT NOT NULL AUTO_INCREMENT,
+	`nm_nome` varchar(50) NOT NULL,
+	`ds_descricao` varchar(100) NOT NULL,
+	`vl_produto` DECIMAL NOT NULL,
+	PRIMARY KEY (`id_produto`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_pedido` (
+    `id_pedido` INT NOT NULL AUTO_INCREMENT,
+    `id_paciente` INT NOT NULL,
+    `dt_venda` DATETIME NOT NULL,
+    `ds_formapagamento` varchar(20) NOT NULL,
+    PRIMARY KEY (`id_pedido`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_pedido_item` (
+	`id_pedido_item` INT NOT NULL AUTO_INCREMENT,
+	`id_pedido` INT NOT NULL,
+	`id_produto` INT NOT NULL,
+	PRIMARY KEY (`id_pedido_item`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_compra` (
+	`id_compra` INT NOT NULL AUTO_INCREMENT,
+	`id_fornecedor` INT NOT NULL,
+	`nm_compra` varchar(50) NOT NULL,
+	`qtd_unidade` varchar(20) NOT NULL,
+	`vl_compra` DECIMAL NOT NULL,
+	`dt_compra` DATE NOT NULL,
+	PRIMARY KEY (`id_compra`)
+);
+
+CREATE TABLE `esteticaDB`.`tb_compraitem` (
+	`id_compraitem` INT NOT NULL AUTO_INCREMENT,
+	`id_compra` INT NOT NULL,
+	`id_produto` INT NOT NULL,
+	PRIMARY KEY (`id_compraitem`)
+);
+
+ALTER TABLE `esteticaDB`.`tb_folhapagamento` ADD CONSTRAINT `tb_folhapagamento_fk0` FOREIGN KEY (`id_funcionario`) REFERENCES `esteticaDB`.`tb_funcionario`(`id_funcionario`);
+
+ALTER TABLE `esteticaDB`.`tb_compra` ADD CONSTRAINT `tb_compra_fk0` FOREIGN KEY (`id_fornecedor`) REFERENCES `esteticaDB`.`tb_fornecedor`(`id_fornecedor`);
+
+ALTER TABLE `esteticaDB`.`tb_compraitem` ADD CONSTRAINT `tb_compraitem_fk0` FOREIGN KEY (`id_compra`) REFERENCES `esteticaDB`.`tb_compra`(`id_compra`);
+	
+ALTER TABLE `esteticaDB`.`tb_compraitem` ADD CONSTRAINT `tb_compraitem_fk1` FOREIGN KEY (`id_produto`) REFERENCES `esteticaDB`.`tb_produto`(`id_produto`);
+
+ALTER TABLE `esteticaDB`.`tb_pedido` ADD CONSTRAINT `tb_pedido_fk0` FOREIGN KEY (`id_paciente`) REFERENCES `esteticaDB`.`tb_paciente`(`id_paciente`);
+
+ALTER TABLE `esteticaDB`.`tb_pedido_item` ADD CONSTRAINT `tb_pedido_item_fk0` FOREIGN KEY (`id_pedido`) REFERENCES `esteticaDB`.`tb_pedido`(`id_pedido`);
+
+ALTER TABLE `esteticaDB`.`tb_pedido_item` ADD CONSTRAINT `tb_pedido_item_fk1` FOREIGN KEY (`id_produto`) REFERENCES `esteticaDB`.`tb_produto`(`id_produto`);
+
+
+Create view `esteticaDB`.`vw_consultar_folhapagamento` as 
+SELECT  `esteticaDB`.`tb_funcionario`.`nm_completo`,
+		`esteticaDB`.`tb_folhapagamento`.`ds_mes`,
+		`esteticaDB`.`tb_folhapagamento`.`vl_salarioliquido`
+   FROM	`esteticaDB`.`tb_funcionario`
+   JOIN	`esteticaDB`.`tb_folhapagamento`
+     ON	`esteticaDB`.`tb_folhapagamento`.`id_funcionario` = `esteticaDB`.`tb_funcionario`.`id_funcionario`;
+
+CREATE VIEW `esteticaDB`.`vw_pedido_consultar` AS 
+	SELECT `esteticaDB`.`tb_pedido`.`id_pedido`,
+		   `esteticaDB`.`tb_paciente`.`nm_completo`,
+           `esteticaDB`.`tb_pedido`.`dt_venda`,
+		   count(`esteticaDB`.`tb_pedido_item`.`id_pedido_item`),
+           sum(`esteticaDB`.`tb_produto`.`vl_produto`)
+      FROM `esteticaDB`.`tb_pedido`
+      JOIN `esteticaDB`.`tb_pedido_item`
+        ON `esteticaDB`.`tb_pedido`.`id_pedido` = `esteticaDB`.`tb_pedido_item`.`id_pedido`
+	  JOIN `esteticaDB`.`tb_produto`
+        ON `esteticaDB`.`tb_pedido_item`.`id_produto` = `esteticaDB`.`tb_produto`.`id_produto`
+	  JOIN `esteticaDB`.`tb_paciente`
+        ON `esteticaDB`.`tb_paciente`.`id_paciente` = `esteticaDB`.`tb_pedido`.`id_paciente`
+	 GROUP 
+	    BY `esteticaDB`.`tb_pedido`.`id_pedido`,
+		   `esteticaDB`.`tb_paciente`.`nm_completo`,
+           `esteticaDB`.`tb_pedido`.`dt_venda`;
+
+
+	INSERT INTO  `esteticaDB`.`tb_funcionario` (nm_completo, ds_sexo, dt_nascimento, ds_rg, ds_cpf, ds_telefone,
+ ds_cep, ds_ndacasa, ds_email, dt_admissao, ds_cargo, ds_login, ds_senha, bt_permissaoadm, vl_salario) 
+     VALUES ('Karine Pereira ', 'Feminino', '1999/01/01', '39.979.994-9', '969.994.997-91', '(11)9999-9999','048.35-060','25','karivandri@gmail.com',
+	 '2018/01/01','Diretora Geral','adm','1234', true, '10000');
+
+	INSERT INTO  `esteticaDB`.`tb_funcionario` (nm_completo, ds_sexo, dt_nascimento, ds_rg, ds_cpf, ds_telefone,
+ ds_cep, ds_ndacasa, ds_email, dt_admissao, ds_cargo, ds_login, ds_senha, bt_permissaoadm, vl_salario)  
+     VALUES ('Maristella Alves ', 'Feminino', '1999/01/01', '39.999.999-8', '999.999.999-98', '(11)9999-9999','048.35-050','50','maristellaalves@hotmail.com',
+	 '2018/01/01','Gerente Geral','func','1234', false, '10000');
+
+	 INSERT INTO  `esteticaDB`.`tb_funcionario` (nm_completo, ds_sexo, dt_nascimento, ds_rg, ds_cpf, ds_telefone,
+ ds_cep, ds_ndacasa, ds_email, dt_admissao, ds_cargo, ds_login, ds_senha, bt_permissaoadm, vl_salario)  
+     VALUES ('Maria Clara dos Santos', 'Feminino', '1999/09/01', '39.999.998-8', '999.999.998-98', '(11)9899-9999','048.35-080','70','mariac.santos@gmail.com',
+	 '2018/01/01','Representante Comercial','func','1234', false, '10000');
+
+	 INSERT INTO  `esteticaDB`.`tb_funcionario` (nm_completo, ds_sexo, dt_nascimento, ds_rg, ds_cpf, ds_telefone,
+ ds_cep, ds_ndacasa, ds_email, dt_admissao, ds_cargo, ds_login, ds_senha, bt_permissaoadm, vl_salario)  
+     VALUES ('Nádia Gomes', 'Feminino', '1999/09/10', '39.999.988-8', '999.899.998-98', '(11)9899-9979','048.35-010','90','nadiagooomes@gmail.com',
+	 '2018/01/01','Analista Financeiro','func','1234', false, '10000');
+
+	 INSERT INTO  `esteticaDB`.`tb_funcionario` (nm_completo, ds_sexo, dt_nascimento, ds_rg, ds_cpf, ds_telefone,
+ ds_cep, ds_ndacasa, ds_email, dt_admissao, ds_cargo, ds_login, ds_senha, bt_permissaoadm, vl_salario)  
+     VALUES ('Sara Maria ', 'Feminino', '1999/07/01', '39.999.978-8', '997.999.998-98', '(11)9879-9999','048.37-080','182','sara.m.estoque@gmail.com',
+	 '2018/01/01','Mercadólogo','func','1234', false, '10000');
+
+	 INSERT INTO  `esteticaDB`.`tb_funcionario` (nm_completo, ds_sexo, dt_nascimento, ds_rg, ds_cpf, ds_telefone,
+ ds_cep, ds_ndacasa, ds_email, dt_admissao, ds_cargo, ds_login, ds_senha, bt_permissaoadm, vl_salario)  
+     VALUES ('Lívia Carvalho', 'Feminino', '1998/07/01', '39.929.958-8', '997.349.998-98', '(11)9879-5499','048.23-070','15','liviacarvalho@hotmail.com',
+	 '2018/01/01','Gestor de Recursos Humanos','func','1234', false, '10000');
+
+	 INSERT INTO  `esteticaDB`.`tb_funcionario` (nm_completo, ds_sexo, dt_nascimento, ds_rg, ds_cpf, ds_telefone,
+ ds_cep, ds_ndacasa, ds_email, dt_admissao, ds_cargo, ds_login, ds_senha, bt_permissaoadm, vl_salario)  
+     VALUES ('Angélica Oliveira', 'Feminino', '1999/06/11', '39.394.978-7', '997.923.568-78', '(11)9879-9234','048.87-060','156','angelicaoliveira@gmail.com',
+	 '2018/01/01','Cirurgião Geral','func','1234', false, '6629');
+
+     
+
+	 INSERT INTO `esteticaDB`.`tb_produto` (nm_nome, ds_descricao, vl_produto)
+		VALUES ('Consulta Inicial', 'Primeira consulta', '110.45');
+        
+        
+	INSERT INTO `esteticaDB`.`tb_fornecedor` (nm_nome, ds_cnpj, ds_telefone, ds_cep, ds_rua, ds_ndacasa, ds_email)
+		VALUES ('Carlos Chambi', '58.654.784/1465-98 ', '(11)6548-3153', '048.49-070', 'Rua José Ferraz', '78', 'carlos98@gmail.com');
+
+DROP TABLE IF EXISTS `mydb`.`fluxo_view`;
+USE `esteticaDB`;
+CREATE  OR REPLACE ALGORITHM = UNDEFINED DEFINER =`root`@`localhost` 
+SQL SECURITY DEFINER VIEW `OdontologiaDB`.`fluxo_view` AS select cast(`esteticaDB`.`tb_folhapagamento`.`ds_mes` as date) AS `dt_data`,sum((`esteticaDB`.`tb_folhapagamento`.`vl_salarioliquido`)) AS `vl_total`,'saida' AS `ds_caixa`,'Folha de Pagamento' AS `ds_movimento` 
+from `esteticaDB`.`tb_folhapagamento` 
+group by `esteticaDB`.`tb_folhapagamento`.`ds_mes` 
+union select cast(`esteticaDB`.`tb_compra`.`dt_compra` as date) AS `dt_data`,sum(`esteticaDB`.`tb_compra`.`vl_compra`) AS `vl_total`,'saida' AS `ds_caixa`,'Compra' AS `ds_movimento` 
+from (((`esteticaDB`.`tb_compra` 
+join `esteticaDB`.`tb_compraitem` 
+on((`esteticaDB`.`tb_compra`.`id_compra` = `esteticaDB`.`tb_compraitem`.`id_compra`))) 
+join `esteticaDB`.`tb_compra` 
+on((`esteticaDB`.`tb_compraitem`.`id_compraitem` = `esteticaDB`.`tb_compra`.`id_compra`))) 
+join `esteticaDB`.`tb_fornecedor` 
+on((`esteticaDB`.`tb_fornecedor`.`id_fornecedor` = `esteticaDB`.`tb_compra`.`id_fornecedor`))) 
+group by `dt_data` union select cast(`esteticaDB`.`tb_pedido`.`dt_venda` as date) AS `dt_data`,sum(`esteticaDB`.`tb_produto`.`vl_produto`) AS `vl_total`,'Entrada' AS `ds_caixa`,' venda' AS `ds_movimento` 
+from (((`esteticaDB`.`tb_pedido_item` 
+join `esteticaDB`.`tb_pedido` 
+on((`esteticaDB`.`tb_pedido_item`.`id_pedido` = `esteticaDB`.`tb_pedido`.`id_pedido`))) 
+join `esteticaDB`.`tb_produto` 
+on((`esteticaDB`.`tb_pedido_item`.`id_produto` = `esteticaDB`.`tb_produto`.`id_produto`))) 
+join `esteticaDB`.`tb_paciente` 
+on((`esteticaDB`.`tb_pedido`.`id_paciente` = `esteticaDB`.`tb_paciente`.`id_paciente`)));
